@@ -1,136 +1,249 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Portfolio</title>
-	<!-- css files -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
-
-	<link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
-	<meta name="author" content="Hassan Ali">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregnancy Risk Monitor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .hidden {
+            display: none;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+    </style>
 </head>
-	<body>
-		<!-- Navbar -->
-		<nav class="nav container void-background">
-			<!-- This "nav-menu" is hidden on mobile -->
-			<!-- Add the modifier "is-active" to display it on mobile -->
-			<div class="nav-left">
-				<a href="http://medium.com/@hassanhelfi/" class="nav-item">
-					<span class="icon">
-						<i class="fa fa-medium"></i>
-					</span>
-				</a>
-				<a href="http://github.com/helfi92" class="nav-item">
-					<span class="icon">
-						<i class="fa fa-github"></i>
-					</span>
-				</a>
-				<a href="https://twitter.com/hassanhelfi" class="nav-item">
-					<span class="icon">
-						<i class="fa fa-twitter"></i>
-					</span>
-				</a>				
-			</div>
+<body>
 
-			<div class="nav-right nav-menu">
-				<a class="nav-item" href="#about">About</a>
-				<a class="nav-item" href="#projects">Projects</a>
-				<a class="nav-item" href="#social">Social</a>
-			</div>
+<div class="container">
 
-			<!-- This "nav-toggle" hamburger menu is only visible on mobile -->
-			<!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
-			<span class="nav-toggle">
-				<span></span>
-				<span></span>
-				<span></span>
-			</span>
-		</nav>
-				
-		<!-- About Me -->
-		<section id="about" class="section section-1">
-			<div class="container has-text-centered">
-				<!-- Source: https://flic.kr/p/pAZBNK -->
-				<img class="avatar" src="assets/img/profile.png">
-			</div>
-			<div class="container"></br>
-				<p class="intro">
-					Lorem Khaled Ipsum is a major key to success. To succeed you must believe. When you believe, you will succeed. Mogul talk. Find peace, life is like a water fall, you’ve gotta flow. Lion! Fan luv. Eliptical talk.
-				</p>
-			</div>
-		</section>
-		
-		<!-- Projects -->
-		<section  id="projects" class="section section-2">
-			<div class="container">
-				<div class="has-text-centered">
-					<h3 class="title is-3">Projects</h3>
-				</div>
-				
-				<div class="columns is-multiline is-desktop">
-					<!-- Project 1 -->
-					<div class="column">
-						<div class="box project-text">
-							<article>
-								<div>
-									<figure class="image project-figure">
-										<img src="assets/img/project-1.jpg" alt="Image">
-									</figure>
-								</div>
-								<div>			
-									<p>
-										They don’t want us to eat. I told you all this before, when you have a swimming pool, do not use chlorine, use salt water, the healing, salt water is the healing.
-									</p>
-								</div>
-							</article>
-						</div>
-					</div>
-					<!-- Project 2 -->
-					<div class="column">
-						<div class="box project-text">
-							<article>
-								<div>
-									<figure class="image project-figure">
-										<img src="assets/img/project-2.jpg" alt="Image">
-									</figure>
-								</div>
-								<div>			
-									<p>
-										Bless up. Another one. How’s business? Boomin. Don’t ever play yourself. Life is what you make it, so let’s make it.
-									</p>
-								</div>
-							</article>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen">
+        <h1>Login</h1>
+        <label>Email:</label>
+        <input type="email" id="login-email" placeholder="Enter your email">
 
-		<!-- Social -->
-		<section id="social" class="section section-3">
-			<div class="container">
-				<div class="has-text-centered">					
-					<h3 class="title is-3">Let's Socialize</h3>
-				</div>
-				<div class="social-container columns">
-					<div class="column is-6 has-text-centered">
-						<a target="_blank" href="https://ca.linkedin.com/in/hassan-ali-6132468a"><img class="" src="assets/img/linkedin.png"></a>
-					</div>
-					<div class="column is-6 has-text-centered">
-						<a target="_blank" href="https://www.facebook.com/Hassan.Helfi"><img class="" src="assets/img/facebook.png"></a>
-					</div>
-				</div>
-			</div>
-		</section>	
-		
-		<!-- Footer -->
-		<section class="section-4 has-text-centered container">
-			<a href="http://www.hassanali.me/about">Hassan Ali</a>
-		</section>
-		
-		<!-- Scripts  -->
-		<script src="controller.js"></script>		
-	</body>	
+        <label>Password:</label>
+        <input type="password" id="login-password" placeholder="Enter your password">
+
+        <button onclick="login()">Login</button>
+
+        <p>Don't have an account? <a href="#" onclick="showSignUp()">Sign Up</a></p>
+    </div>
+
+    <!-- SIGNUP SCREEN -->
+    <div id="signup-screen" class="hidden">
+        <h1>Sign Up</h1>
+        <label>Name:</label>
+        <input type="text" id="signup-name" placeholder="Enter your name">
+
+        <label>Email:</label>
+        <input type="email" id="signup-email" placeholder="Enter your email">
+
+        <label>Password:</label>
+        <input type="password" id="signup-password" placeholder="Create a password">
+
+        <label>Doctor Name:</label>
+        <input type="text" id="signup-doctor-name" placeholder="Enter your doctor's name">
+
+        <label>Doctor Phone:</label>
+        <input type="text" id="signup-doctor-phone" placeholder="Enter your doctor's phone number">
+
+        <button onclick="signUp()">Sign Up</button>
+
+        <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+    </div>
+
+    <!-- HOME SCREEN -->
+    <div id="home-screen" class="hidden">
+        <h1>Welcome to Pregnancy Risk Monitor</h1>
+        <button onclick="showHealthDataEntry()">Enter Health Data</button>
+        <button onclick="showDoctorInfo()">Doctor Information</button>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <!-- HEALTH DATA ENTRY SCREEN -->
+    <div id="health-data-screen" class="hidden">
+        <h1>Health Data Entry</h1>
+        <label>Period Start Date:</label>
+        <input type="date" id="period-start">
+
+        <label>Ovulation Date:</label>
+        <input type="date" id="ovulation-date">
+
+        <label>Fertile Period:</label>
+        <input type="text" id="fertile-period" placeholder="Enter fertile period">
+
+        <label>Symptoms:</label>
+        <select id="symptom-dropdown">
+            <option value="nausea">Nausea</option>
+            <option value="headache">Headache</option>
+            <option value="dizziness">Dizziness</option>
+            <option value="swelling">Swelling</option>
+            <!-- Add more symptoms as needed -->
+        </select>
+
+        <button onclick="checkRisk()">Check Risk Level</button>
+        <div id="risk-result" class="result"></div>
+
+        <button onclick="goBack()">Back</button>
+    </div>
+
+    <!-- DOCTOR INFORMATION SCREEN -->
+    <div id="doctor-info-screen" class="hidden">
+        <h1>Doctor Information</h1>
+        <label>Doctor Name:</label>
+        <input type="text" id="doctor-name" placeholder="Enter your doctor's name">
+
+        <label>Doctor Phone Number:</label>
+        <input type="text" id="doctor-phone" placeholder="Enter doctor's phone number">
+
+        <button onclick="saveDoctorInfo()">Save Doctor Info</button>
+        <div id="doctor-result" class="result"></div>
+
+        <button onclick="goBack()">Back</button>
+    </div>
+
+</div>
+
+<script>
+    // Simulated login/sign-up database
+    let users = [];
+
+    // Show login screen
+    function showLogin() {
+        document.getElementById('login-screen').classList.remove('hidden');
+        document.getElementById('signup-screen').classList.add('hidden');
+    }
+
+    // Show signup screen
+    function showSignUp() {
+        document.getElementById('login-screen').classList.add('hidden');
+        document.getElementById('signup-screen').classList.remove('hidden');
+    }
+
+    // Login function
+    function login() {
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        const user = users.find(user => user.email === email && user.password === password);
+
+        if (user) {
+            alert("Login successful!");
+            showHomeScreen();
+        } else {
+            alert("Invalid credentials!");
+        }
+    }
+
+    // Sign-up function
+    function signUp() {
+        const name = document.getElementById('signup-name').value;
+        const email = document.getElementById('signup-email').value;
+        const password = document.getElementById('signup-password').value;
+        const doctorName = document.getElementById('signup-doctor-name').value;
+        const doctorPhone = document.getElementById('signup-doctor-phone').value;
+
+        users.push({ name, email, password, doctorName, doctorPhone });
+        alert("Sign-up successful!");
+        showLogin();
+    }
+
+    // Show home screen
+    function showHomeScreen() {
+        document.getElementById('login-screen').classList.add('hidden');
+        document.getElementById('signup-screen').classList.add('hidden');
+        document.getElementById('home-screen').classList.remove('hidden');
+    }
+
+    // Logout
+    function logout() {
+        document.getElementById('home-screen').classList.add('hidden');
+        showLogin();
+    }
+
+    // Show health data entry screen
+    function showHealthDataEntry() {
+        document.getElementById('home-screen').classList.add('hidden');
+        document.getElementById('health-data-screen').classList.remove('hidden');
+    }
+
+    // Show doctor info screen
+    function showDoctorInfo() {
+        document.getElementById('home-screen').classList.add('hidden');
+        document.getElementById('doctor-info-screen').classList.remove('hidden');
+    }
+
+    // Check risk level based on symptoms
+    function checkRisk() {
+        const symptom = document.getElementById('symptom-dropdown').value;
+        let riskMessage = "";
+
+        if (symptom === "nausea" || symptom === "headache") {
+            riskMessage = "This is a common pregnancy symptom (Normal).";
+        } else if (symptom === "dizziness") {
+            riskMessage = "Intermediate risk! Consult a doctor.";
+        } else if (symptom === "swelling") {
+            riskMessage = "Urgent care needed! Please visit a doctor immediately.";
+        }
+
+        document.getElementById('risk-result').textContent = riskMessage;
+    }
+
+    // Save doctor information
+    function saveDoctorInfo() {
+        const doctorName = document.getElementById('doctor-name').value;
+        const doctorPhone = document.getElementById('doctor-phone').value;
+
+        document.getElementById('doctor-result').textContent = `Saved Doctor: ${doctorName}, Phone: ${doctorPhone}`;
+    }
+
+    // Go back to home screen
+    function goBack() {
+        document.getElementById('health-data-screen').classList.add('hidden');
+        document.getElementById('doctor-info-screen').classList.add('hidden');
+        document.getElementById('home-screen').classList.remove('hidden');
+    }
+</script>
+
+</body>
 </html>
