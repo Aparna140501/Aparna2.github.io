@@ -9,38 +9,46 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
+            background-color: #e9ecef;
+            color: #495057;
         }
         .container {
             width: 100%;
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h1 {
             text-align: center;
-            color: #333;
+            color: #343a40;
         }
         label {
             display: block;
-            margin-top: 10px;
-            font-size: 14px;
+            margin-top: 15px;
+            font-size: 16px;
+            color: #212529;
         }
         input, select, button {
-            width: 100%;
-            padding: 10px;
+            width: calc(100% - 22px);
+            padding: 12px;
             margin-top: 5px;
-            border: 1px solid #ccc;
+            border: 1px solid #ced4da;
             border-radius: 5px;
+            font-size: 16px;
         }
         button {
-            background-color: #4CAF50;
+            background-color: #007bff;
             color: white;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
+            border: none;
+            margin-top: 15px;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #0056b3;
         }
         .hidden {
             display: none;
@@ -48,7 +56,13 @@
         .result {
             margin-top: 20px;
             font-weight: bold;
-            color: #e74c3c;
+            color: #dc3545;
+        }
+        .back-button {
+            background-color: #6c757d;
+        }
+        .back-button:hover {
+            background-color: #5a6268;
         }
     </style>
 </head>
@@ -59,10 +73,10 @@
     <!-- LOGIN SCREEN -->
     <div id="login-screen">
         <h1>Login</h1>
-        <label>Email:</label>
+        <label for="login-email">Email:</label>
         <input type="email" id="login-email" placeholder="Enter your email">
 
-        <label>Password:</label>
+        <label for="login-password">Password:</label>
         <input type="password" id="login-password" placeholder="Enter your password">
 
         <button onclick="login()">Login</button>
@@ -73,19 +87,19 @@
     <!-- SIGNUP SCREEN -->
     <div id="signup-screen" class="hidden">
         <h1>Sign Up</h1>
-        <label>Name:</label>
+        <label for="signup-name">Name:</label>
         <input type="text" id="signup-name" placeholder="Enter your name">
 
-        <label>Email:</label>
+        <label for="signup-email">Email:</label>
         <input type="email" id="signup-email" placeholder="Enter your email">
 
-        <label>Password:</label>
+        <label for="signup-password">Password:</label>
         <input type="password" id="signup-password" placeholder="Create a password">
 
-        <label>Doctor Name:</label>
+        <label for="signup-doctor-name">Doctor Name:</label>
         <input type="text" id="signup-doctor-name" placeholder="Enter your doctor's name">
 
-        <label>Doctor Phone:</label>
+        <label for="signup-doctor-phone">Doctor Phone:</label>
         <input type="text" id="signup-doctor-phone" placeholder="Enter your doctor's phone number">
 
         <button onclick="signUp()">Sign Up</button>
@@ -104,16 +118,19 @@
     <!-- HEALTH DATA ENTRY SCREEN -->
     <div id="health-data-screen" class="hidden">
         <h1>Health Data Entry</h1>
-        <label>Period Start Date:</label>
+        <label for="period-start">Period Start Date:</label>
         <input type="date" id="period-start">
 
-        <label>Ovulation Date:</label>
+        <label for="period-end">Period End Date:</label>
+        <input type="date" id="period-end">
+
+        <label for="ovulation-date">Ovulation Date:</label>
         <input type="date" id="ovulation-date">
 
-        <label>Fertile Period:</label>
+        <label for="fertile-period">Fertile Period:</label>
         <input type="text" id="fertile-period" placeholder="Enter fertile period">
 
-        <label>Symptoms:</label>
+        <label for="symptom-dropdown">Symptoms:</label>
         <select id="symptom-dropdown">
             <option value="nausea">Nausea</option>
             <option value="headache">Headache</option>
@@ -125,22 +142,22 @@
         <button onclick="checkRisk()">Check Risk Level</button>
         <div id="risk-result" class="result"></div>
 
-        <button onclick="goBack()">Back</button>
+        <button class="back-button" onclick="goBack()">Back</button>
     </div>
 
     <!-- DOCTOR INFORMATION SCREEN -->
     <div id="doctor-info-screen" class="hidden">
         <h1>Doctor Information</h1>
-        <label>Doctor Name:</label>
+        <label for="doctor-name">Doctor Name:</label>
         <input type="text" id="doctor-name" placeholder="Enter your doctor's name">
 
-        <label>Doctor Phone Number:</label>
+        <label for="doctor-phone">Doctor Phone Number:</label>
         <input type="text" id="doctor-phone" placeholder="Enter doctor's phone number">
 
         <button onclick="saveDoctorInfo()">Save Doctor Info</button>
         <div id="doctor-result" class="result"></div>
 
-        <button onclick="goBack()">Back</button>
+        <button class="back-button" onclick="goBack()">Back</button>
     </div>
 
 </div>
@@ -232,12 +249,20 @@
     // Save doctor information
     function saveDoctorInfo() {
         const doctorName = document.getElementById('doctor-name').value;
+        const doctorPhone =
         const doctorPhone = document.getElementById('doctor-phone').value;
-
-        document.getElementById('doctor-result').textContent = `Saved Doctor: ${doctorName}, Phone: ${doctorPhone}`;
+        // Simulate saving doctor info (You should store this data in a real database in production)
+        let currentUser = users.find(user => user.email === document.getElementById('login-email').value);
+        if (currentUser) {
+            currentUser.doctorName = doctorName;
+            currentUser.doctorPhone = doctorPhone;
+            document.getElementById('doctor-result').textContent = "Doctor information updated successfully.";
+        } else {
+            document.getElementById('doctor-result').textContent = "Failed to update doctor information.";
+        }
     }
 
-    // Go back to home screen
+    // Go back to previous screen
     function goBack() {
         document.getElementById('health-data-screen').classList.add('hidden');
         document.getElementById('doctor-info-screen').classList.add('hidden');
