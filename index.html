@@ -32,19 +32,13 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            margin: 5px;
         }
         button:hover {
             background-color: #0056b3;
         }
-        #voice-input {
+        input, select, textarea {
             width: calc(100% - 22px);
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-        select, input, textarea {
-            width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -59,6 +53,9 @@
             margin-top: 10px;
             text-align: left;
         }
+        .form-group {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -66,25 +63,51 @@
     <div class="container">
         <h1 id="welcome">Welcome</h1>
 
-        <button id="start-voice">Start Voice Input</button>
-        <input type="text" id="voice-input" placeholder="Voice input will appear here" />
+        <!-- Login Form -->
+        <div id="login-form" class="form-group">
+            <h2>Login</h2>
+            <input type="text" id="login-username" placeholder="Username">
+            <input type="password" id="login-password" placeholder="Password">
+            <button onclick="login()">Login</button>
+            <button onclick="showSignUpForm()">Sign Up</button>
+        </div>
 
-        <h2>Symptoms Tracker</h2>
-        <textarea id="symptoms" placeholder="Enter your symptoms here..."></textarea>
+        <!-- Sign Up Form -->
+        <div id="signup-form" class="form-group" style="display:none;">
+            <h2>Sign Up</h2>
+            <input type="text" id="signup-username" placeholder="Username">
+            <input type="password" id="signup-password" placeholder="Password">
+            <input type="text" id="signup-doctor" placeholder="Doctor's Name (optional)">
+            <button onclick="signUp()">Sign Up</button>
+            <button onclick="showLoginForm()">Back to Login</button>
+        </div>
 
-        <h2>Language Selection</h2>
-        <select id="language-select">
-            <option value="en">English</option>
-            <option value="hi">Hindi</option>
-            <!-- Add more languages as needed -->
-        </select>
+        <!-- User Dashboard -->
+        <div id="dashboard" style="display:none;">
+            <button id="start-voice">Start Voice Input</button>
+            <input type="text" id="voice-input" placeholder="Voice input will appear here">
 
-        <button id="save-symptoms">Save Symptoms</button>
-        <button id="help">Help</button>
+            <h2>Symptoms Tracker</h2>
+            <textarea id="symptoms" placeholder="Enter your symptoms here..."></textarea>
 
-        <div class="help-content" id="help-content">
-            <p>Here is some help information...</p>
-            <!-- More help content can be added here -->
+            <h2>Period Tracker</h2>
+            <input type="date" id="last-period" placeholder="Last Period Date">
+            <input type="date" id="next-period" placeholder="Next Expected Period Date">
+
+            <h2>Language Selection</h2>
+            <select id="language-select">
+                <option value="en">English</option>
+                <option value="hi">Hindi</option>
+                <!-- Add more languages as needed -->
+            </select>
+
+            <button id="save-data">Save Data</button>
+            <button id="help">Help</button>
+
+            <div class="help-content" id="help-content">
+                <p>Here is some help information...</p>
+                <!-- More help content can be added here -->
+            </div>
         </div>
     </div>
 
@@ -98,14 +121,18 @@
                     translation: {
                         "welcome": "Welcome",
                         "help": "Help",
-                        "symptoms": "Enter your symptoms here..."
+                        "symptoms": "Enter your symptoms here...",
+                        "last_period": "Last Period Date",
+                        "next_period": "Next Expected Period Date"
                     }
                 },
                 hi: {
                     translation: {
                         "welcome": "स्वागत है",
                         "help": "सहायता",
-                        "symptoms": "अपनी समस्याएँ यहाँ दर्ज करें..."
+                        "symptoms": "अपनी समस्याएँ यहाँ दर्ज करें...",
+                        "last_period": "पिछली अवधि की तारीख",
+                        "next_period": "अगली अपेक्षित अवधि की तारीख"
                     }
                 }
             }
@@ -113,6 +140,8 @@
             // Update UI with translations
             document.getElementById('welcome').innerHTML = i18next.t('welcome');
             document.getElementById('symptoms').placeholder = i18next.t('symptoms');
+            document.getElementById('last-period').placeholder = i18next.t('last_period');
+            document.getElementById('next-period').placeholder = i18next.t('next_period');
             document.getElementById('help').innerHTML = i18next.t('help');
         });
 
@@ -138,6 +167,8 @@
                 if (err) return console.error(err);
                 document.getElementById('welcome').innerHTML = i18next.t('welcome');
                 document.getElementById('symptoms').placeholder = i18next.t('symptoms');
+                document.getElementById('last-period').placeholder = i18next.t('last_period');
+                document.getElementById('next-period').placeholder = i18next.t('next_period');
                 document.getElementById('help').innerHTML = i18next.t('help');
             });
         });
@@ -157,6 +188,45 @@
         window.addEventListener('offline', () => {
             alert('You are offline. Some features may not be available.');
         });
+
+        // Authentication Mock Functions
+        function login() {
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+
+            // Perform login operation (mocked)
+            if (username && password) {
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('signup-form').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+            } else {
+                alert('Please enter username and password');
+            }
+        }
+
+        function signUp() {
+            const username = document.getElementById('signup-username').value;
+            const password = document.getElementById('signup-password').value;
+            const doctor = document.getElementById('signup-doctor').value;
+
+            // Perform signup operation (mocked)
+            if (username && password) {
+                alert('Sign Up Successful');
+                showLoginForm();
+            } else {
+                alert('Please enter all required fields');
+            }
+        }
+
+        function showLoginForm() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('signup-form').style.display = 'none';
+        }
+
+        function showSignUpForm() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('signup-form').style.display = 'block';
+        }
     </script>
 
 </body>
