@@ -3,272 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pregnancy Risk Monitor</title>
+    <title>High-Risk Pregnancy App</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
             margin: 0;
             padding: 0;
-            background-color: #e9ecef;
-            color: #495057;
+            text-align: center;
         }
         .container {
-            width: 100%;
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         h1 {
-            text-align: center;
-            color: #343a40;
-        }
-        label {
-            display: block;
-            margin-top: 15px;
-            font-size: 16px;
-            color: #212529;
-        }
-        input, select, button {
-            width: calc(100% - 22px);
-            padding: 12px;
-            margin-top: 5px;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            font-size: 16px;
+            color: #007bff;
         }
         button {
             background-color: #007bff;
             color: white;
-            font-size: 18px;
-            cursor: pointer;
             border: none;
-            margin-top: 15px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
         }
         button:hover {
             background-color: #0056b3;
         }
-        .hidden {
+        #voice-input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        select, input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .help {
+            color: #007bff;
+            cursor: pointer;
+        }
+        .help-content {
             display: none;
-        }
-        .result {
-            margin-top: 20px;
-            font-weight: bold;
-            color: #dc3545;
-        }
-        .back-button {
-            background-color: #6c757d;
-        }
-        .back-button:hover {
-            background-color: #5a6268;
+            margin-top: 10px;
+            text-align: left;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
+    <div class="container">
+        <h1 id="welcome">Welcome</h1>
 
-    <!-- LOGIN SCREEN -->
-    <div id="login-screen">
-        <h1>Login</h1>
-        <label for="login-email">Email:</label>
-        <input type="email" id="login-email" placeholder="Enter your email">
+        <button id="start-voice">Start Voice Input</button>
+        <input type="text" id="voice-input" placeholder="Voice input will appear here" />
 
-        <label for="login-password">Password:</label>
-        <input type="password" id="login-password" placeholder="Enter your password">
+        <h2>Symptoms Tracker</h2>
+        <textarea id="symptoms" placeholder="Enter your symptoms here..."></textarea>
 
-        <button onclick="login()">Login</button>
-
-        <p>Don't have an account? <a href="#" onclick="showSignUp()">Sign Up</a></p>
-    </div>
-
-    <!-- SIGNUP SCREEN -->
-    <div id="signup-screen" class="hidden">
-        <h1>Sign Up</h1>
-        <label for="signup-name">Name:</label>
-        <input type="text" id="signup-name" placeholder="Enter your name">
-
-        <label for="signup-email">Email:</label>
-        <input type="email" id="signup-email" placeholder="Enter your email">
-
-        <label for="signup-password">Password:</label>
-        <input type="password" id="signup-password" placeholder="Create a password">
-
-        <label for="signup-doctor-name">Doctor Name:</label>
-        <input type="text" id="signup-doctor-name" placeholder="Enter your doctor's name">
-
-        <label for="signup-doctor-phone">Doctor Phone:</label>
-        <input type="text" id="signup-doctor-phone" placeholder="Enter your doctor's phone number">
-
-        <button onclick="signUp()">Sign Up</button>
-
-        <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
-    </div>
-
-    <!-- HOME SCREEN -->
-    <div id="home-screen" class="hidden">
-        <h1>Welcome to Pregnancy Risk Monitor</h1>
-        <button onclick="showHealthDataEntry()">Enter Health Data</button>
-        <button onclick="showDoctorInfo()">Doctor Information</button>
-        <button onclick="logout()">Logout</button>
-    </div>
-
-    <!-- HEALTH DATA ENTRY SCREEN -->
-    <div id="health-data-screen" class="hidden">
-        <h1>Health Data Entry</h1>
-        <label for="period-start">Period Start Date:</label>
-        <input type="date" id="period-start">
-
-        <label for="period-end">Period End Date:</label>
-        <input type="date" id="period-end">
-
-        <label for="ovulation-date">Ovulation Date:</label>
-        <input type="date" id="ovulation-date">
-
-        <label for="fertile-period">Fertile Period:</label>
-        <input type="text" id="fertile-period" placeholder="Enter fertile period">
-
-        <label for="symptom-dropdown">Symptoms:</label>
-        <select id="symptom-dropdown">
-            <option value="nausea">Nausea</option>
-            <option value="headache">Headache</option>
-            <option value="dizziness">Dizziness</option>
-            <option value="swelling">Swelling</option>
-            <!-- Add more symptoms as needed -->
+        <h2>Language Selection</h2>
+        <select id="language-select">
+            <option value="en">English</option>
+            <option value="hi">Hindi</option>
+            <!-- Add more languages as needed -->
         </select>
 
-        <button onclick="checkRisk()">Check Risk Level</button>
-        <div id="risk-result" class="result"></div>
+        <button id="save-symptoms">Save Symptoms</button>
+        <button id="help">Help</button>
 
-        <button class="back-button" onclick="goBack()">Back</button>
+        <div class="help-content" id="help-content">
+            <p>Here is some help information...</p>
+            <!-- More help content can be added here -->
+        </div>
     </div>
 
-    <!-- DOCTOR INFORMATION SCREEN -->
-    <div id="doctor-info-screen" class="hidden">
-        <h1>Doctor Information</h1>
-        <label for="doctor-name">Doctor Name:</label>
-        <input type="text" id="doctor-name" placeholder="Enter your doctor's name">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/21.7.1/i18next.min.js"></script>
+    <script>
+        // Initialize i18next for multilingual support
+        i18next.init({
+            lng: 'en', // Default language
+            resources: {
+                en: {
+                    translation: {
+                        "welcome": "Welcome",
+                        "help": "Help",
+                        "symptoms": "Enter your symptoms here..."
+                    }
+                },
+                hi: {
+                    translation: {
+                        "welcome": "स्वागत है",
+                        "help": "सहायता",
+                        "symptoms": "अपनी समस्याएँ यहाँ दर्ज करें..."
+                    }
+                }
+            }
+        }, (err, t) => {
+            // Update UI with translations
+            document.getElementById('welcome').innerHTML = i18next.t('welcome');
+            document.getElementById('symptoms').placeholder = i18next.t('symptoms');
+            document.getElementById('help').innerHTML = i18next.t('help');
+        });
 
-        <label for="doctor-phone">Doctor Phone Number:</label>
-        <input type="text" id="doctor-phone" placeholder="Enter doctor's phone number">
+        // Voice Command Integration
+        const recognition = new webkitSpeechRecognition();
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
 
-        <button onclick="saveDoctorInfo()">Save Doctor Info</button>
-        <div id="doctor-result" class="result"></div>
+        document.getElementById('start-voice').addEventListener('click', () => {
+            recognition.start();
+        });
 
-        <button class="back-button" onclick="goBack()">Back</button>
-    </div>
+        recognition.onresult = event => {
+            const transcript = event.results[0][0].transcript;
+            document.getElementById('voice-input').value = transcript;
+            // Process the voice input as needed
+        };
 
-</div>
+        // Language Selection
+        document.getElementById('language-select').addEventListener('change', (e) => {
+            const selectedLang = e.target.value;
+            i18next.changeLanguage(selectedLang, (err, t) => {
+                if (err) return console.error(err);
+                document.getElementById('welcome').innerHTML = i18next.t('welcome');
+                document.getElementById('symptoms').placeholder = i18next.t('symptoms');
+                document.getElementById('help').innerHTML = i18next.t('help');
+            });
+        });
 
-<script>
-    // Simulated login/sign-up database
-    let users = [];
+        // Help Section Toggle
+        document.getElementById('help').addEventListener('click', () => {
+            const helpContent = document.getElementById('help-content');
+            helpContent.style.display = helpContent.style.display === 'none' ? 'block' : 'none';
+        });
 
-    // Show login screen
-    function showLogin() {
-        document.getElementById('login-screen').classList.remove('hidden');
-        document.getElementById('signup-screen').classList.add('hidden');
-    }
+        // Offline Functionality Example
+        window.addEventListener('online', () => {
+            alert('You are online. Data sync can now proceed.');
+            // Code to sync local data with the server
+        });
 
-    // Show signup screen
-    function showSignUp() {
-        document.getElementById('login-screen').classList.add('hidden');
-        document.getElementById('signup-screen').classList.remove('hidden');
-    }
-
-    // Login function
-    function login() {
-        const email = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
-        const user = users.find(user => user.email === email && user.password === password);
-
-        if (user) {
-            alert("Login successful!");
-            showHomeScreen();
-        } else {
-            alert("Invalid credentials!");
-        }
-    }
-
-    // Sign-up function
-    function signUp() {
-        const name = document.getElementById('signup-name').value;
-        const email = document.getElementById('signup-email').value;
-        const password = document.getElementById('signup-password').value;
-        const doctorName = document.getElementById('signup-doctor-name').value;
-        const doctorPhone = document.getElementById('signup-doctor-phone').value;
-
-        users.push({ name, email, password, doctorName, doctorPhone });
-        alert("Sign-up successful!");
-        showLogin();
-    }
-
-    // Show home screen
-    function showHomeScreen() {
-        document.getElementById('login-screen').classList.add('hidden');
-        document.getElementById('signup-screen').classList.add('hidden');
-        document.getElementById('home-screen').classList.remove('hidden');
-    }
-
-    // Logout
-    function logout() {
-        document.getElementById('home-screen').classList.add('hidden');
-        showLogin();
-    }
-
-    // Show health data entry screen
-    function showHealthDataEntry() {
-        document.getElementById('home-screen').classList.add('hidden');
-        document.getElementById('health-data-screen').classList.remove('hidden');
-    }
-
-    // Show doctor info screen
-    function showDoctorInfo() {
-        document.getElementById('home-screen').classList.add('hidden');
-        document.getElementById('doctor-info-screen').classList.remove('hidden');
-    }
-
-    // Check risk level based on symptoms
-    function checkRisk() {
-        const symptom = document.getElementById('symptom-dropdown').value;
-        let riskMessage = "";
-
-        if (symptom === "nausea" || symptom === "headache") {
-            riskMessage = "This is a common pregnancy symptom (Normal).";
-        } else if (symptom === "dizziness") {
-            riskMessage = "Intermediate risk! Consult a doctor.";
-        } else if (symptom === "swelling") {
-            riskMessage = "Urgent care needed! Please visit a doctor immediately.";
-        }
-
-        document.getElementById('risk-result').textContent = riskMessage;
-    }
-
-    // Save doctor information
-    function saveDoctorInfo() {
-        const doctorName = document.getElementById('doctor-name').value;
-        const doctorPhone =
-        const doctorPhone = document.getElementById('doctor-phone').value;
-        // Simulate saving doctor info (You should store this data in a real database in production)
-        let currentUser = users.find(user => user.email === document.getElementById('login-email').value);
-        if (currentUser) {
-            currentUser.doctorName = doctorName;
-            currentUser.doctorPhone = doctorPhone;
-            document.getElementById('doctor-result').textContent = "Doctor information updated successfully.";
-        } else {
-            document.getElementById('doctor-result').textContent = "Failed to update doctor information.";
-        }
-    }
-
-    // Go back to previous screen
-    function goBack() {
-        document.getElementById('health-data-screen').classList.add('hidden');
-        document.getElementById('doctor-info-screen').classList.add('hidden');
-        document.getElementById('home-screen').classList.remove('hidden');
-    }
-</script>
+        window.addEventListener('offline', () => {
+            alert('You are offline. Some features may not be available.');
+        });
+    </script>
 
 </body>
 </html>
