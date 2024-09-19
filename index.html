@@ -56,6 +56,10 @@
         .form-group {
             margin-bottom: 20px;
         }
+        .risk-level {
+            color: #ff0000;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -89,6 +93,15 @@
 
             <h2>Symptoms Tracker</h2>
             <textarea id="symptoms" placeholder="Enter your symptoms here..."></textarea>
+            <select id="symptom-select">
+                <option value="nausea">Nausea</option>
+                <option value="dizziness">Dizziness</option>
+                <option value="fatigue">Fatigue</option>
+                <!-- Add more symptoms as needed -->
+            </select>
+
+            <h3>Risk Level:</h3>
+            <div id="risk-level" class="risk-level">Normal</div>
 
             <h2>Period Tracker</h2>
             <input type="date" id="last-period" placeholder="Last Period Date">
@@ -100,6 +113,13 @@
                 <option value="hi">Hindi</option>
                 <!-- Add more languages as needed -->
             </select>
+
+            <h2>Psychological Therapy</h2>
+            <button onclick="showTherapyOptions()">Show Therapy Options</button>
+            <div id="therapy-options" style="display:none;">
+                <p>Consultation with a psychologist can help manage stress and mental health during pregnancy.</p>
+                <!-- Add more detailed therapy options and resources -->
+            </div>
 
             <button id="save-data">Save Data</button>
             <button id="help">Help</button>
@@ -179,6 +199,30 @@
             helpContent.style.display = helpContent.style.display === 'none' ? 'block' : 'none';
         });
 
+        // Show Therapy Options
+        function showTherapyOptions() {
+            const therapyOptions = document.getElementById('therapy-options');
+            therapyOptions.style.display = therapyOptions.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Risk Level Calculation
+        function calculateRiskLevel() {
+            const symptoms = document.getElementById('symptoms').value.toLowerCase();
+            let riskLevel = 'Normal';
+
+            if (symptoms.includes('nausea') || symptoms.includes('dizziness')) {
+                riskLevel = 'Intermediate';
+            } else if (symptoms.includes('severe pain') || symptoms.includes('heavy bleeding')) {
+                riskLevel = 'Urgent';
+            }
+
+            document.getElementById('risk-level').innerText = riskLevel;
+            if (riskLevel === 'Urgent') {
+                alert('Immediate attention required. Please contact your doctor.');
+                // Provide option to call or text doctor
+            }
+        }
+
         // Offline Functionality Example
         window.addEventListener('online', () => {
             alert('You are online. Data sync can now proceed.');
@@ -191,43 +235,62 @@
 
         // Authentication Mock Functions
         function login() {
-            const username = document.getElementById('login-username').value;
-            const password = document.getElementById('login-password').value;
+            const username = document.getElementBy
+            // Authentication Mock Functions (continued)
+            function login() {
+                const username = document.getElementById('login-username').value;
+                const password = document.getElementById('login-password').value;
+                // Mock login validation
+                if (username && password) {
+                    document.getElementById('login-form').style.display = 'none';
+                    document.getElementById('signup-form').style.display = 'none';
+                    document.getElementById('dashboard').style.display = 'block';
+                } else {
+                    alert('Please enter both username and password.');
+                }
+            }
 
-            // Perform login operation (mocked)
-            if (username && password) {
+            function signUp() {
+                const username = document.getElementById('signup-username').value;
+                const password = document.getElementById('signup-password').value;
+                const doctor = document.getElementById('signup-doctor').value;
+                // Mock sign-up validation
+                if (username && password) {
+                    alert('Sign up successful!');
+                    document.getElementById('signup-form').style.display = 'none';
+                    document.getElementById('login-form').style.display = 'block';
+                } else {
+                    alert('Please enter all required fields.');
+                }
+            }
+
+            function showSignUpForm() {
                 document.getElementById('login-form').style.display = 'none';
+                document.getElementById('signup-form').style.display = 'block';
+            }
+
+            function showLoginForm() {
                 document.getElementById('signup-form').style.display = 'none';
-                document.getElementById('dashboard').style.display = 'block';
-            } else {
-                alert('Please enter username and password');
+                document.getElementById('login-form').style.display = 'block';
             }
-        }
 
-        function signUp() {
-            const username = document.getElementById('signup-username').value;
-            const password = document.getElementById('signup-password').value;
-            const doctor = document.getElementById('signup-doctor').value;
+            document.getElementById('save-data').addEventListener('click', () => {
+                calculateRiskLevel();
+                // Save data logic here
+                alert('Data saved successfully!');
+            });
 
-            // Perform signup operation (mocked)
-            if (username && password) {
-                alert('Sign Up Successful');
-                showLoginForm();
-            } else {
-                alert('Please enter all required fields');
+            // Attach event listeners
+            document.getElementById('symptoms').addEventListener('input', calculateRiskLevel);
+            document.getElementById('start-voice').addEventListener('click', () => {
+                recognition.start();
+            });
+
+            // Function to show therapy options
+            function showTherapyOptions() {
+                const therapyOptions = document.getElementById('therapy-options');
+                therapyOptions.style.display = therapyOptions.style.display === 'none' ? 'block' : 'none';
             }
-        }
-
-        function showLoginForm() {
-            document.getElementById('login-form').style.display = 'block';
-            document.getElementById('signup-form').style.display = 'none';
-        }
-
-        function showSignUpForm() {
-            document.getElementById('login-form').style.display = 'none';
-            document.getElementById('signup-form').style.display = 'block';
-        }
-    </script>
-
-</body>
+        </script>
+    </body>
 </html>
