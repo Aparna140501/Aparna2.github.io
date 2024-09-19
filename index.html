@@ -235,62 +235,47 @@
 
         // Authentication Mock Functions
         function login() {
-            const username = document.getElementBy
-            // Authentication Mock Functions (continued)
-            function login() {
-                const username = document.getElementById('login-username').value;
-                const password = document.getElementById('login-password').value;
-                // Mock login validation
-                if (username && password) {
-                    document.getElementById('login-form').style.display = 'none';
-                    document.getElementById('signup-form').style.display = 'none';
-                    document.getElementById('dashboard').style.display = 'block';
-                } else {
-                    alert('Please enter both username and password.');
-                }
-            }
-
-            function signUp() {
-                const username = document.getElementById('signup-username').value;
-                const password = document.getElementById('signup-password').value;
-                const doctor = document.getElementById('signup-doctor').value;
-                // Mock sign-up validation
-                if (username && password) {
-                    alert('Sign up successful!');
-                    document.getElementById('signup-form').style.display = 'none';
-                    document.getElementById('login-form').style.display = 'block';
-                } else {
-                    alert('Please enter all required fields.');
-                }
-            }
-
-            function showSignUpForm() {
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+            // Mock login validation
+            if (username && password) {
                 document.getElementById('login-form').style.display = 'none';
-                document.getElementById('signup-form').style.display = 'block';
+                document.getElementById('signup-form').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+            } else {
+                alert('Please enter both username and password.');
             }
+        }
 
-            function showLoginForm() {
+        function signUp() {
+            const username = document.getElementById('signup-username').value;
+            const password = document.getElementById('signup-password').value;
+            const doctor = document.getElementById('signup-doctor').value;
+            // Mock sign-up validation
+            if (username && password) {
+                alert('Sign up successful!');
                 document.getElementById('signup-form').style.display = 'none';
                 document.getElementById('login-form').style.display = 'block';
+            } else {
+                alert('Please enter all required fields.');
             }
+        }
 
-            document.getElementById('save-data').addEventListener('click', () => {
-                calculateRiskLevel();
-                // Save data logic here
-                alert('Data saved successfully!');
-            });
+        function showSignUpForm() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('signup-form').style.display = 'block';
+        }
 
-            // Attach event listeners
-            document.getElementById('symptoms').addEventListener('input', calculateRiskLevel);
-            document.getElementById('start-voice').addEventListener('click', () => {
-                recognition.start();
-            });
+        function showLoginForm() {
+            document.getElementById('signup-form').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+        }
 
-            // Function to show therapy options
-            function showTherapyOptions() {
-                const therapyOptions = document.getElementById('therapy-options');
-                therapyOptions.style.display = therapyOptions.style.display === 'none' ? 'block' : 'none';
-            }
-        </script>
-    </body>
+        document.getElementById('save-data').addEventListener('click', () => {
+            calculateRiskLevel();
+            // Save data logic here
+            alert('Data saved successfully!');
+        });
+    </script>
+</body>
 </html>
